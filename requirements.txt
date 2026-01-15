@@ -1,0 +1,7 @@
+fastapi 
+uvicorn 
+requests
+pyTelegramBotAPI 
+requests
+upsonic 
+autogen-ext[http-tool]
