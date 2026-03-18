@@ -5,3 +5,5 @@ pyTelegramBotAPI
 requests
 upsonic 
 autogen-ext[http-tool]
+python-dotenv
+anthropic

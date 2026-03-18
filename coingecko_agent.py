@@ -9,12 +9,21 @@ load_dotenv()
 MCP_SERVER_URL = os.getenv("MCP_SERVER_URL", "http://localhost:8001")
 PUBLIC_BASE = "https://api.coingecko.com/api/v3"
 
+"""
 class CoinGeckoAgent(Agent):
     def __init__(self):
         super().__init__(
             job_title="CoinGecko Crypto Agent",
             model="claude/claude-3-5-sonnet",
             api_key=os.getenv("ANTHROPIC_API_KEY")
+        )
+"""
+class CoinGeckoAgent(Agent):
+    def __init__(self):
+        super().__init__(
+            name="CoinGecko Crypto Agent",        
+            model="anthropic/claude-3-5-sonnet"   
+           
         )
 
     def normalize_params(self, params: dict) -> dict:

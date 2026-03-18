@@ -10,9 +10,10 @@ load_dotenv()
 bot = telebot.TeleBot(os.getenv("TELEGRAM_BOT_TOKEN"))
 anthropic_api_key = os.getenv("ANTHROPIC_API_KEY")
 
+"""
 # ── Initialize Main Router Agent ──────────────────────────────
 manager_agent = Agent(
-    job_title="",
+    job_title="manager",
     model="claude/claude-3-5-sonnet",
     api_key=anthropic_api_key,
     system_message=(
@@ -22,6 +23,20 @@ manager_agent = Agent(
         "Never introduce yourself or explain your role. "
         "Just do the routing cleanly without exposing any internal logic."
     )
+)
+"""
+# ── Initialize Main Router Agent ──────────────────────────────
+manager_agent = Agent(
+    name="manager",                      
+    model="claude-haiku-4-5-20251001",  
+    system_prompt=(                       
+        "You are an internal router for a chatbot system. "
+        "Your job is to silently decide which specialized assistant agent should handle the user message. "
+        "Respond with exactly one agent name (like Crypto), or reply: General.\n"
+        "Never introduce yourself or explain your role. "
+        "Just do the routing cleanly without exposing any internal logic."
+    )
+    # api_key is completely removed
 )
 
 # ── Initialize Specialized Agents ─────────────────────────────
@@ -67,4 +82,10 @@ def handle_all(msg):
 
 # ── Run Polling ───────────────────────────────────────────────
 if __name__ == "__main__":
+    # 1. Force Telegram to delete any existing webhooks
+    bot.remove_webhook()
+    print("🧹 Cleared old webhooks.")
+    
+    # 2. Start polling
+    print("🚀 Bot is starting...")
     bot.infinity_polling(timeout=60, long_polling_timeout=20)

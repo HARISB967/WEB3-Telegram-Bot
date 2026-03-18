@@ -31,6 +31,7 @@ SNAPSHOT_PATHS = {
     "defi/total_value_locked"
 }
 
+"""
 class GlassnodeAgent(Agent):
     def __init__(self):
         super().__init__(
@@ -38,6 +39,15 @@ class GlassnodeAgent(Agent):
             model="claude/claude-3-5-sonnet",
             api_key=os.getenv("ANTHROPIC_API_KEY")
         )
+"""
+class GlassnodeAgent(Agent):
+    def __init__(self):
+        super().__init__(
+            name="Glassnode On-Chain Agent",      
+            model="anthropic/claude-3-5-sonnet"   
+            
+        )
+
 
     def parse_request(self, user_text: str) -> dict | None:
         prompt = (
