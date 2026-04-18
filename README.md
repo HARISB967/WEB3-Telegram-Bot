@@ -1,29 +1,38 @@
-# crypto_agent_upsonic
+# agent_upsonic
 
+## Overview
+This project serves as an intelligent orchestration layer integrating Model Context Protocol (MCP) servers with autonomous agents. By interacting through a Telegram bot, the system dynamically routes external Web3 API calls according to user prompts.
 
-create a telegram bot or use an old bot , retrieve its token.
-for glassnode and coingecko use its paid api keys.
+## Prerequisites
+1. Create a Telegram bot (or use an existing one) and retrieve its token.
+2. Obtain paid API keys for Glassnode and CoinGecko.
 
-in env file , add these variables:
+Create an `.env` file in the root directory and add the following variables:
+```env
+ANTHROPIC_API_KEY=
+TELEGRAM_BOT_TOKEN=
+GLASSNODE_API_KEY=
+CG_API_KEY=
+```
 
-ANTHROPIC_API_KEY = 
+## Running the Project
 
-TELEGRAM_BOT_TOKEN = 
+**Note:** Run each of the following commands in a **separate terminal**.
 
-GLASSNODE_API_KEY = 
+**1. Start the MCP Servers:**
+For CoinGecko:
+```bash
+uvicorn mcp_coingecko:app --port 8001
+```
 
-CG_API_KEY=  
+For Glassnode:
+```bash
+uvicorn mcp_glassnode:app --port 8002
+```
 
-terminal commands given in ""
-##every command in seperate terminals##
+**2. Run the Manager Agent:**
+```bash
+python manager_agent.py
+```
 
-to start mcp servers: 
-
-coingecko: " uvicorn mcp_coingecko:app --port 8001  "
-
-
-glassnode: " uvicorn mcp_glassnode:app --port 8002  "
-
-to run manager agent:   " python manager_agent.py "
-
-now interact with the given telegram bot of yours
+Once all servers and the manager agent are running, you can begin interacting with your Telegram bot.
